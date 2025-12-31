@@ -4,24 +4,120 @@
   <meta charset="UTF-8">
   <title>ถึงพี่โดนัด 💖</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body { margin:0; font-family:sans-serif; background:#ffd6e0; display:flex; justify-content:center; align-items:center; height:100vh; }
-    .card { background:white; padding:20px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.2); max-width:360px; text-align:center; }
-    .slider { display:flex; overflow-x:scroll; gap:10px; }
-    .slider img { min-width:100%; border-radius:15px; flex-shrink:0; }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      max-width: 360px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    h1 { color: #ff4d6d; margin-bottom: 10px; }
+    p { font-size: 1.1em; color: #555; line-height: 1.5; }
+    button {
+      margin-top: 15px;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 20px;
+      background: #ff4d6d;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .slider {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 15px;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .slider img {
+      min-width: 100%;
+      scroll-snap-align: start;
+      border-radius: 15px;
+      flex-shrink: 0;
+    }
+    .love-text {
+      margin-top: 12px;
+      font-size: 1.1em;
+      color: #555;
+      line-height: 1.5;
+    }
+    .floating {
+      position: absolute;
+      bottom: -50px;
+      font-size: 24px;
+      animation: floatUp 6s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0) translateX(0); opacity: 1; }
+      100% { transform: translateY(-110vh) translateX(50px); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>ถึงพี่โดนัด ❤️</h1>
-    <div class="slider">
-      <img src="love1.JPG">
-      <img src="love2.PNG">
-      <img src="love3.JPG">
-      <img src="love4.JPG">
-      <img src="love5.JPG">
-    </div>
-    <p>ผมรักพี่น้าา ❤️ คิดถึงพี่ทุกวันเลย</p>
-  </div>
+
+<div class="card" id="card">
+  <h1>ถึงพี่โดนัด 💌</h1>
+  <p>
+    วันนี้วันที่ 1 ผมขอให้พี่มีความสุข<br>
+    ขอให้เรียนจบแล้วมีงานทำดี ๆ นะค๊าบ 😊
+  </p>
+  <button onclick="goLove()">กดไปหน้าถัดไป ➜</button>
+</div>
+
+<script>
+  function goLove() {
+    const card = document.getElementById("card");
+    card.innerHTML = `
+      <h1>ถึงพี่โดนัด ❤️</h1>
+
+      <div class="slider">
+        <img src="love1.JPG">
+        <img src="love2.PNG">
+        <img src="love3.JPG">
+        <img src="love4.JPG">
+        <img src="love5.JPG">
+      </div>
+
+      <div class="love-text">
+        ผมรักพี่น้าา ❤️ คิดถึงพี่ทุกวันเลย<br>
+        ผมรอไปกินหมูกระทะกับพี่นะ<br>
+        อีกอย่าง หาคนถ่ายรูปให้อยู่น้าา จุ๊บ ๆ 😘
+      </div>
+    `;
+  }
+
+  const emojis = ["❤️", "💖", "💘", "✨", "🌸"];
+  setInterval(() => {
+    const e = document.createElement("div");
+    e.className = "floating";
+    e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    e.style.left = Math.random() * 100 + "vw";
+    e.style.fontSize = (Math.random() * 20 + 16) + "px";
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 6000);
+  }, 500);
+</script>
+
 </body>
 </html>
